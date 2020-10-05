@@ -1,50 +1,45 @@
 package com.codersbay;
 
-import java.lang.reflect.Array;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
-    public static void main(String[] args) {
-        bingocard();
-    }
 
-    public static void bingocard() {
-        int bingo[][] = new int[5][5];
-        ArrayList<Integer> used = new ArrayList<Integer>();
-        boolean valid = false;
-        int tmp = 0;
+    public static void main(String[] args) {
+
+        System.out.println("B | I | N | G | O");
+
+        int[][] grid = new int[5][5];
+
+        ArrayList<Integer> used = new ArrayList<>();
+        boolean help = false;
+
+        Random random = new Random();
+
+        int randomInt = 0;
+        int temp = 1;
 
         for (int i = 0; i <= 4; i++) {
-            for (int j = 0; j < bingo.length; j++) {
-                while (!valid) {
-                    tmp = (int) (Math.random() * 15) + 1 + 15 * i;
-                    if (!used.contains(tmp)) {
-                        valid = true;
-                        used.add(tmp);
+            for (int j = 0; j < grid.length; j++) {
+                while (!help) {
+                    randomInt = random.nextInt(15) + temp;
+                    if (!used.contains(randomInt)) {
+                        help = true;
+                        used.add(randomInt);
                     }
                 }
-                bingo[j][i] = tmp;
-                valid = false;
+                grid[j][i] = randomInt;
+                help = false;
             }
+            temp = temp + 15;
         }
-        bingo[2][2] = 0;
+        grid[2][2] = 0;
 
-        String title[] = {"B", " I", " N", " G", " O"};
-
-        for (int i = 0; i < title.length; i++) {
-            System.out.print(title[i] + "\t");
-        }
-
-        System.out.println();
-
-        for (int i = 0; i < bingo.length; i++) {
-            for (int col = 0; col < bingo[i].length; col++) {
-                System.out.print(bingo[i][col] + "\t");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                System.out.print(grid[i][j] + "\t");
             }
             System.out.println();
-
         }
-
     }
-}
+} 
